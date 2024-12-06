@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import TaskContext from './TaskContext';
 
-function AddTask({ task, setTask, handleAddTask }) {
+const AddTask = () => {
+  const { addTask } = useContext(TaskContext);
+  const [task, setTask] = useState('');
+
+  const handleAdd = () => {
+    if (task) {
+      addTask(task);
+      setTask('');
+    }
+  };
+
   return (
     <div>
       <input
@@ -9,9 +20,9 @@ function AddTask({ task, setTask, handleAddTask }) {
         onChange={(e) => setTask(e.target.value)}
         placeholder="Add a task"
       />
-      <button onClick={handleAddTask}>Add Task</button>
+      <button onClick={handleAdd}>Add Task</button>
     </div>
   );
-}
+};
 
 export default AddTask;
